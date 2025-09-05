@@ -41,8 +41,8 @@
             this.txtEstatura = new System.Windows.Forms.TextBox();
             this.txtEdad = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.rbMasculino = new System.Windows.Forms.RadioButton();
             this.rbFemenino = new System.Windows.Forms.RadioButton();
+            this.rbMasculino = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -105,9 +105,11 @@
             this.Borrar.TabIndex = 5;
             this.Borrar.Text = "Borrar";
             this.Borrar.UseVisualStyleBackColor = true;
+            this.Borrar.Click += new System.EventHandler(this.Borrar_Click);
             // 
             // btnGuardar
             // 
+            this.btnGuardar.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnGuardar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGuardar.Location = new System.Drawing.Point(195, 332);
             this.btnGuardar.Name = "btnGuardar";
@@ -115,7 +117,7 @@
             this.btnGuardar.TabIndex = 6;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
-            this.btnGuardar.Click += new System.EventHandler(this.button2_Click);
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // txtNombre
             // 
@@ -170,18 +172,6 @@
             this.groupBox1.Text = "Genero";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
-            // rbMasculino
-            // 
-            this.rbMasculino.AutoSize = true;
-            this.rbMasculino.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbMasculino.Location = new System.Drawing.Point(32, 39);
-            this.rbMasculino.Name = "rbMasculino";
-            this.rbMasculino.Size = new System.Drawing.Size(127, 29);
-            this.rbMasculino.TabIndex = 0;
-            this.rbMasculino.TabStop = true;
-            this.rbMasculino.Text = "Masculino ";
-            this.rbMasculino.UseVisualStyleBackColor = true;
-            // 
             // rbFemenino
             // 
             this.rbFemenino.AutoSize = true;
@@ -193,6 +183,18 @@
             this.rbFemenino.TabStop = true;
             this.rbFemenino.Text = "Femenino";
             this.rbFemenino.UseVisualStyleBackColor = true;
+            // 
+            // rbMasculino
+            // 
+            this.rbMasculino.AutoSize = true;
+            this.rbMasculino.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbMasculino.Location = new System.Drawing.Point(32, 39);
+            this.rbMasculino.Name = "rbMasculino";
+            this.rbMasculino.Size = new System.Drawing.Size(127, 29);
+            this.rbMasculino.TabIndex = 0;
+            this.rbMasculino.TabStop = true;
+            this.rbMasculino.Text = "Masculino ";
+            this.rbMasculino.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
