@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.IO;
+using System.Text.RegularExpressions;
 using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
@@ -17,6 +18,37 @@ namespace _3MLIDTS_EdwinGomez_04
         public Form1()
         {
             InitializeComponent();
+
+            /*txtEdad.TextChanged += validarEdad;
+            txtEstatura.TextChanged += validarEstatura;
+            txtApellido.TextChanged += validarApellido;
+            txtNombre.TextChanged += validarNombre;
+            txtTelefono.TextChanged += validarTelefono;*/
+        }
+        private void validarNombre(object sender, EventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            if (!EsTextovalidar(textBox.Text))
+            {
+                MessageBox.Show("Porfavor ingrese valores corretos par el nombre", "Error Nombre",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                textBox.Clear();
+            }
+        }
+        private bool EsTextovalidar(string texto)
+        {
+            return Regex.IsMatch(texto, @"^[a-zA-Z\s]+$");
+        }
+        private void validarApellido(object sender, EventArgs e)
+        {
+        }
+        private void validarTelefono(object sender, EventArgs e)
+        {
+        }
+        private void validarEstatura(object sender, EventArgs e)
+        {
+        }
+        private void validarEdad(object sender, EventArgs e)
+        {
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
