@@ -19,11 +19,11 @@ namespace _3MLIDTS_EdwinGomez_04
         {
             InitializeComponent();
 
-            /*txtEdad.TextChanged += validarEdad;
+            txtEdad.TextChanged += validarEdad;
             txtEstatura.TextChanged += validarEstatura;
             txtApellido.TextChanged += validarApellido;
             txtNombre.TextChanged += validarNombre;
-            txtTelefono.TextChanged += validarTelefono;*/
+            txtTelefono.TextChanged += validarTelefono;
         }
         private void validarNombre(object sender, EventArgs e)
         {
@@ -40,15 +40,47 @@ namespace _3MLIDTS_EdwinGomez_04
         }
         private void validarApellido(object sender, EventArgs e)
         {
+            TextBox textBox = (TextBox)sender;
+            if (!EsTextovalidar(textBox.Text))
+            {
+                MessageBox.Show("Porfavor ingrese valores corretos par el apellido", "Error Nombre", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                textBox.Clear();
+            }
         }
+       
         private void validarTelefono(object sender, EventArgs e)
         {
+
         }
+        
+
         private void validarEstatura(object sender, EventArgs e)
         {
+            TextBox textEsta = (TextBox)sender;
+            if (!EstaturaValida(textEsta.Text))
+            {
+                MessageBox.Show("Porfavor ingrese valores corretos par la estatura", "Error Estatura", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                textEsta.Clear();
+            }
+        }
+        private bool EstaturaValida(string texto)
+        {
+            decimal resultado;
+            return decimal.TryParse(texto, out resultado);
         }
         private void validarEdad(object sender, EventArgs e)
         {
+            TextBox textEdad = (TextBox)sender;
+            if (!EdadValida(textEdad.Text))
+            {
+                MessageBox.Show("Porfavor ingrese valores corretos par la edad", "Error Edad", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                textEdad.Clear();
+            }
+        }
+        private bool EdadValida(string texto)
+        {
+            int resultado;
+            return int.TryParse(texto, out resultado);
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
@@ -91,7 +123,7 @@ namespace _3MLIDTS_EdwinGomez_04
             {
                 string datos = $"Nombre: {nombres}\r\nApellido: {apellidos}\r\nTelefono: {telefono}\r\nEstatura: {estatura}cm\r\nEdad: {edad}\r\nGenero: {genero}\r\n ";
 
-                //MessageBox.Show(datos,"Infromacion de Registro",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                MessageBox.Show(datos,"Infromacion de Registro",MessageBoxButtons.OK,MessageBoxIcon.Information);
                 string ruta = "C:/Users/gomez/OneDrive/Documentos/EMMA/Materia 3/PA/3MDatosAgoto2025.txt";
                 bool archivoExiste = File.Exists(ruta);
                 using (StreamWriter writer = new StreamWriter(ruta, true))
@@ -103,6 +135,7 @@ namespace _3MLIDTS_EdwinGomez_04
                     writer.WriteLine(datos);
 
                 }
+
 
             }
             

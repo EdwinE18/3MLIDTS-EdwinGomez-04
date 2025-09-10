@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.lblNombre = new System.Windows.Forms.Label();
             this.lblApellido = new System.Windows.Forms.Label();
             this.lblTelefono = new System.Windows.Forms.Label();
@@ -200,6 +201,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.txtEdad);
@@ -214,6 +218,7 @@
             this.Controls.Add(this.lblTelefono);
             this.Controls.Add(this.lblApellido);
             this.Controls.Add(this.lblNombre);
+            this.DoubleBuffered = true;
             this.Name = "Form1";
             this.Text = "Formulario de Registro Master";
             this.groupBox1.ResumeLayout(false);
