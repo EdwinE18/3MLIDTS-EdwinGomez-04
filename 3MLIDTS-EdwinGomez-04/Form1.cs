@@ -50,9 +50,24 @@ namespace _3MLIDTS_EdwinGomez_04
        
         private void validarTelefono(object sender, EventArgs e)
         {
+            TextBox textTel = (TextBox)sender;
+            if (textTel.Text.Length == 10 && TelefonoValido(textTel.Text))
+            {
+                MessageBox.Show("Telefono valido", "Telefono Valido", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtTelefono.BackColor = Color.LightGreen;
+            }
+            else
+            {
+                MessageBox.Show("Porfavor ingrese valores corretos par el telefono", "Error Telefono", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                textTel.Clear();
+                txtTelefono.BackColor = Color.Red;
+            }
 
         }
-        
+        private bool TelefonoValido(string valor)
+        {
+            return valor.Length == 10 && valor.All(char.IsDigit) && long.TryParse(valor,out _);
+        }
 
         private void validarEstatura(object sender, EventArgs e)
         {
