@@ -10,11 +10,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using MySql.Data.MySqlClient;
 namespace _3MLIDTS_EdwinGomez_04
 {
     public partial class Form1 : Form
     {
+        string conectionSQL = "server=localhost;Database=formulario3M;PORT=3306;Uid=root;Pwd=;";
         public Form1()
         {
             InitializeComponent();
@@ -24,6 +25,28 @@ namespace _3MLIDTS_EdwinGomez_04
             txtApellido.TextChanged += validarApellido;
             txtNombre.TextChanged += validarNombre;
             txtTelefono.TextChanged += validarTelefono;
+        }
+        private void InsertarRegistro(string nombre, string apellidos, int edad,decimal estatura, string telefono, string genero)
+        {
+            using (MySqlConnection conection = new MySqlConnection(conectionSQL))
+            {
+                conection.Open();
+
+                string insertQuery = "INSERT INTO registros (nombre, apellidos, edad, estatura, telefono, genero) VALUES (@nombre, @apellidos, @edad, @estatura, @telefono, @genero)";
+
+                using (MySqlCommand command = new MySqlCommand(insertQuery, conection))
+                {
+                    command.Parameters.AddWithValue("@nombre", nombre);
+                    command.Parameters.AddWithValue("@apellidos", apellidos);
+                    command.Parameters.AddWithValue("@edad", edad);
+                    command.Parameters.AddWithValue("@estatura", estatura);
+                    command.Parameters.AddWithValue("@telefono", telefono);
+                    command.Parameters.AddWithValue("@genero", genero);
+                    command.ExecuteNonQuery();
+                }
+                conection.Close();
+            }
+
         }
         private void validarNombre(object sender, EventArgs e)
         {
@@ -141,18 +164,33 @@ namespace _3MLIDTS_EdwinGomez_04
                 MessageBox.Show(datos,"Infromacion de Registro",MessageBoxButtons.OK,MessageBoxIcon.Information);
                 string ruta = "C:/Users/gomez/OneDrive/Documentos/EMMA/Materia 3/PA/3MDatosAgoto2025.txt";
                 bool archivoExiste = File.Exists(ruta);
-                using (StreamWriter writer = new StreamWriter(ruta, true))
+                if (archivoExiste == false)
                 {
-                    if (archivoExiste)
-                    {
-                        writer.WriteLine();
-                    }
-                    writer.WriteLine(datos);
-
+                    File.WriteAllText(ruta, datos);
+                    InsertarRegistro(nombres, apellidos, int.Parse(edad), decimal.Parse(estatura), telefono, genero);
                 }
+                else
+                {
+                    // Verificar si el archivo ya existe
+                    using (StreamWriter writer = new StreamWriter(ruta, true))
+                    {
+                        if (archivoExiste)
+                        {
+                            // Si el archivo existe, añadir un separador antes del nuevo registro
+                            writer.WriteLine();
+                        }
 
-
+                        writer.WriteLine(datos);
+                        InsertarRegistro(nombres, apellidos, int.Parse(edad), decimal.Parse(estatura), telefono, genero);
+                        MessageBox.Show("Datos insertados en la Base de Datos:\n\n" + datos, "Información BD", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                // Mostrar un mensaje con los datos capturados
+                //MessageBox.Show("Datos guardados con éxito:\n\n" + datos, "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+
+
+        
             
             else
             {
